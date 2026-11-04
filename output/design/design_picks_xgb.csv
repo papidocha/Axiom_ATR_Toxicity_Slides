@@ -1,0 +1,7 @@
+design,subseries,R2,smiles,tox,tox_sd,potency,potency_sd,p_top,p_ge2,p_safe,p_joint,n_support,n_support_top,parent,parent_ki_bin,parent_tox,n_basic_nitrogen,mw
+D1,I-O,O=S1(=O)CCC(O[*:2])CC1,N#CCc1cnc2c(C(=O)Nc3cnccc3OC3CCS(=O)(=O)CC3)c(N)nn2c1,1.326,0.338,0.966,0.285,0.949,1.0,0.666,0.632,28,25,Compound_I-O-45,++,1.062,0,441.473
+D2,I-O,COC(=O)[C@H]1CC[C@@H](O[*:2])CC1,COC(=O)[C@@H]1CC[C@H](Oc2ccncc2NC(=O)c2c(N)nn3cc(CC#N)cnc23)CC1,1.247,0.371,0.982,0.283,0.956,1.0,0.571,0.546,28,25,Compound_I-O-18,++,0.737,0,449.471
+D3,I-O,[O-][S+]1CCC(O[*:2])CC1,N#CCc1cnc2c(C(=O)Nc3cnccc3OC3CC[S+]([O-])CC3)c(N)nn2c1,1.197,0.343,0.95,0.284,0.943,1.0,0.519,0.49,28,25,Compound_I-O-44,++,1.084,0,425.474
+D4,I-C,C1CC([*:2])CO1,N#CCc1cnc2c(C(=O)Nc3cnccc3C3CCOC3)c(N)nn2c1,1.51,0.336,0.448,0.318,0.435,0.999,0.836,0.364,2,0,Compound_I-C-75,++,1.397,0,363.381
+D5,I-N,COCCS(=O)(=O)C1CCN([*:2])CC1,COCCS(=O)(=O)C1CCN(c2ccncc2NC(=O)c2c(N)nn3cc(CC#N)cnc23)CC1,1.281,0.333,0.54,0.339,0.547,0.999,0.618,0.338,9,3,Compound_I-N-208,++,1.087,0,498.569
+D6,I-C,C1CC1[*:2],N#CCc1cnc2c(C(=O)Nc3cnccc3C3CC3)c(N)nn2c1,1.389,0.336,0.457,0.323,0.447,0.998,0.733,0.327,2,0,Compound_I-C-42,++,1.169,0,333.355

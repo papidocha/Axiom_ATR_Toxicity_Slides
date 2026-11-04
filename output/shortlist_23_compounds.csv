@@ -1,0 +1,24 @@
+rank,compound,compound_id,compound_id_alt,subseries,ki_bin,ki_range_uM,selection_basis,is_benchmark_tuvusertib,general_tox,general_tox_percentile,n_basic_nitrogen,mw,clogp,smiles
+1,Compound_I-O-27,I-O-27,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.8567,1.0,0,357.76,1.69,COC1=C(NC(=O)C2=C3N=CC(CC#N)=CN3N=C2N)C=NC(Cl)=C1
+2,Compound_I-C-3,I-C-3,,I-C,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),False,1.8461,0.9982,0,307.32,1.33,CC1=C(NC(=O)C2=C3N=CC(CC#N)=CN3N=C2N)C=NC=C1
+3,Compound_I-O-29,I-O-29,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.7213,0.9964,0,367.37,1.05,COCCOC1=C(NC(=O)C2=C3N=CC(CC#N)=CN3N=C2N)C=NC=C1
+4,Compound_I-O-26,I-O-26,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.6683,0.9946,0,323.32,1.03,COC1=C(NC(=O)C2=C3N=CC(CC#N)=CN3N=C2N)C=NC=C1
+5,Compound_I-O-28,I-O-28,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.6366,0.991,0,337.34,1.42,CCOC1=C(NC(=O)C2=C3N=CC(CC#N)=CN3N=C2N)C=NC=C1
+6,Compound_I-C-4,I-C-4,,I-C,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),False,1.6103,0.9892,0,286.27,1.41,CC1=C(NC(=O)C2=C3N=CC(F)=CN3N=C2N)C=NC=C1
+7,Compound_I-O-34,I-O-34,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.5898,0.9873,0,391.31,1.97,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OCC(F)(F)F)C=CN=C1
+8,Compound_I-C-73,I-C-73,,I-C,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),False,1.5701,0.9837,0,383.39,1.43,CN1CCC(CC1=O)C1=C(NC(=O)C2=C3N=CC(F)=CN3N=C2N)C=NC=C1
+9,Compound_I-O-41,I-O-41,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.5658,0.9819,0,393.41,1.58,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCCOC2)C=CN=C1
+10,Compound_I-O-8,I-O-8,,I-O,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),False,1.5251,0.9801,0,414.4,2.12,NC1=NN2C=C(F)C=NC2=C1C(=O)NC1=C(OC2CCC(CC2)C(O)=O)C=CN=C1
+11,Compound_I-O-37,I-O-37,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.5099,0.9783,0,379.38,1.19,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCOC2)C=CN=C1
+12,Compound_I-O-4,I-O-4,,I-O,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),False,1.4878,0.9765,0,302.27,1.11,COC1=C(NC(=O)C2=C3N=CC(F)=CN3N=C2N)C=NC=C1
+13,Compound_I-C-79,I-C-79,,I-C,++,0.01-1,Ki ++ and general_tox >= tuvusertib (+1.47),True,1.4682,0.9729,0,370.32,1.64,CN1C=NC=C1C1=C(NC(=O)C2=C3N=CC(F)=CN3N=C2N)C=NC=C1F
+14,Compound_I-O-30,I-O-30,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.451,0.9693,0,393.41,1.58,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCOCC2)C=CN=C1
+15,Compound_I-O-36,I-O-36,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.4488,0.9656,0,363.38,1.96,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCC2)C=CN=C1
+16,Compound_I-O-40,I-O-40,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.4428,0.9638,0,367.37,0.79,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OCCCO)C=CN=C1
+17,Compound_I-O-38,I-O-38,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.4386,0.962,0,365.35,0.8,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2COC2)C=CN=C1
+18,Compound_I-O-43,I-O-43,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.3796,0.9548,0,377.41,2.35,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCCC2)C=CN=C1
+19,Compound_I-O-33,I-O-33,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.3684,0.9512,0,353.34,0.4,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OCCO)C=CN=C1
+20,Compound_I-O-42,I-O-42,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.3305,0.9403,0,379.38,1.19,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(O[C@H]2CCOC2)C=CN=C1
+21,Compound_I-O-32,I-O-32,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.3302,0.9385,0,363.38,1.81,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OCC2CC2)C=CN=C1
+22,Compound_I-O-31,I-O-31,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.3136,0.9331,0,379.38,1.19,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(O[C@@H]2CCOC2)C=CN=C1
+23,Compound_I-O-39,I-O-39,,I-O,+++,< 0.01,Ki +++ and general_tox percentile >= 0.90,False,1.2689,0.9222,0,391.44,2.74,NC1=NN2C=C(CC#N)C=NC2=C1C(=O)NC1=C(OC2CCCCC2)C=CN=C1

@@ -1,0 +1,11 @@
+prediction_column,experimental_readout
+cell_viability,mtt_ridge_norm_inv
+ldh,ldh_ridge_norm
+cell_death,mean_nuclei_count_ridge_norm_inv
+nuclei_size,mean_nuclei_area_mean_ridge_norm_inv
+er_stress,vacuole_10_sum_ratio
+cytoplasm_area,cyto_area_ratio_ridge_norm_inv
+ros,ros_stress_granules_sum_ratio
+mitochondria,mito_v2_puncta_ratio_ridge_norm
+bioactivity1 / 2,bioactivity_platenorm and bioactivity_regnorm (order not recorded)
+halos,halo increase (not in the file sent)
