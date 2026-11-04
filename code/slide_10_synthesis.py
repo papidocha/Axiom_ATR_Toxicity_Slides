@@ -1,9 +1,9 @@
-"""Slide 10: how three of the designs (D1, D4, D5 of slide 9) would be made.
+"""Slide 10: how three of the designs (D2, D4, D6 of slide 9) would be made.
 
 Every design is one amide: the acid component common to all (A) coupled to a 3-aminopyridine that carries the tail
 (B). Everything up to the aminopyridine is chemistry documented in the patent US 9,340,546 B2 (blue, with page
 numbers of the PDF); the final coupling with this acid and this amine is the one new step (green). The three designs
-stand for the three ways the tail is attached: C-O (ether), C-C (Suzuki) and C-N.
+stand for the three ways the tail is attached: C-O (ether), C-N and C-C (Suzuki).
 """
 
 from __future__ import annotations
@@ -36,8 +36,8 @@ _ACID_Y = 0.92
 _HEADING_B_Y = 2.14  #: the heading of panel B sits 0.5 in above this
 _BOXES_TOP = 1.86  #: top of the first green box
 _BOX_GAP = 0.06
-_LEGEND_X = 0.0
-_LEGEND_Y = (5.98, 6.22)  #: bottom left, under the starting materials
+_LEGEND_X = 8.7
+_LEGEND_Y = (0.55, 0.8)  #: top right, beside the precursor synthesis
 
 # --------------------------------------------------------------------------- #
 # Chemistry: structures, reagents and the pages of US 9,340,546 B2 they come from
@@ -53,17 +53,17 @@ _COUPLING = (("6c",), ("NMP, 100 °C",))
 _COUPLING_PAGE = "p. 104"
 
 #: tail (R2) -> (starting material, aminopyridine, conditions above the arrow, conditions below it, patent pages).
-#: The thioether of D1 is oxidised (Prep. O-4) before the nitro group is reduced.
+#: The thioether of D2 is oxidised (Prep. O-4) before the nitro group is reduced.
 _ROUTES = {
     "O=S1(=O)CCC(O[*:2])CC1": (
         "OC1CCSCC1", "Nc1cnccc1OC1CCS(=O)(=O)CC1",
         ("a) NaH, THF, 0 °C → RT", "b) mCPBA, DCM, RT"), ("c) H2, Pd/C, MeOH, RT",), "p. 182, 188"),
-    "C1CC([*:2])CO1": (
-        "CC1(C)OB(OC1(C)C)C1=CCOC1", "Nc1cnccc1C1CCOC1",
-        ("a) Pd2(dba)3, PPh3, Na2CO3,", "toluene/EtOH, 75 °C"), ("b) H2, Pd/C, MeOH, RT",), "p. 198"),
     "COCCS(=O)(=O)C1CCN([*:2])CC1": (
         "COCCS(=O)(=O)C1CCNCC1", "Nc1cnccc1N1CCC(S(=O)(=O)CCOC)CC1",
         ("a) DIPEA, dioxane, 80 °C",), ("b) H2, Pd/C, MeOH, RT",), "p. 111"),
+    "C1CC([*:2])CO1": (
+        "CC1(C)OB(OC1(C)C)C1=CCOC1", "Nc1cnccc1C1CCOC1",
+        ("a) Pd2(dba)3, PPh3, Na2CO3,", "toluene/EtOH, 75 °C"), ("b) H2, Pd/C, MeOH, RT",), "p. 198"),
 }
 
 

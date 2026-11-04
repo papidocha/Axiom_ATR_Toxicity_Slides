@@ -67,8 +67,15 @@ Reproduced by `python code/design.py` (about a minute).
   * *Potency:* an ordinal score from the **experimental** patent Ki bin: + (1 to 5 µM) = −1, ++ (0.01 to 1 µM) = 0, +++ (< 0.01 µM) = +1,
     for the 543 compounds with a bin. The model predicts a number on this scale, and boosted trees keep it within about −1 to +1.
 * **Potency on the slide:** the number under each structure is the model's predicted potency score on the scale of the y-axis, where
-  0 is the ++ bin and +1 is the +++ bin; it is a coding of ordered bins, not a Ki value. D1 to D3 (+0.95 to +0.98) are predicted +++.
-  D4 to D6 (+0.45 to +0.54) lie between ++ and +++: the model cannot say which bin, so these trade potency for predicted safety.
+  0 is the ++ bin and +1 is the +++ bin; it is a coding of ordered bins, not a Ki value. D2 and D3 (+0.94) are predicted close to +++.
+  D1, D4 and D5 (+0.56 to +0.83) lie between ++ and +++, and D6 (+0.23) is closer to ++: these trade potency for predicted safety.
+* **Selection (how the six were picked), using only the models' direct outputs:**
+  1. Both models score every virtual compound: a predicted `general_tox` and a predicted potency score.
+  2. Keep the 2,125 candidates that pass the evidence filter, then those with a predicted `general_tox` of at least +1.18 (the 90th
+     percentile of the series). 40 remain.
+  3. Rank the 40 by predicted `general_tox` plus predicted potency score (D1: 1.53 + 0.83 = 2.36).
+  4. Go down the ranking and take a candidate unless three from its sub-series are already chosen or it has a Morgan Tanimoto similarity
+     above 0.85 to one already chosen. Stop at six.
 * **Accuracy (5-fold cross-validation within the series):** `general_tox` R² 0.87, RMSE 0.33; potency score R² 0.33, but AUC 0.93 for
   separating +++ from the rest (0.80 within the 40 compounds with R1 = CH2CN). The folds are random, so neighbors of every test compound
   are in the training set: this shows the model interpolates within the series, not how it does on truly new chemistry.

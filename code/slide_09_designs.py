@@ -21,7 +21,7 @@ import plot_utils as pu
 
 
 NAME = "slide_09_designs"
-_CANVAS = (3.0, 2.8)  #: larger than D5's long tail, so no structure is shrunk below slide 2's bond length
+_CANVAS = (3.0, 2.8)  #: larger than D4's long tail, so no structure is shrunk below slide 2's bond length
 
 _GREEN = pu.DESIGN_GREEN  #: slide 8's colour for the selected compounds
 _DESIGN = pu.lighten(_GREEN, 0.3)  #: the six designs, in both panels (orange is kept for basic amines)

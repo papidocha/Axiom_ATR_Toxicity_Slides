@@ -9,10 +9,9 @@ regressors are trained on the series from the Morgan count fingerprint (radius 2
 * potency: an ordinal score from the experimental patent Ki bin (+ = -1, ++ = 0, +++ = +1).
 
 The virtual library is every R1 x R2 tail x R3 in {H, F, Cl} combination of the series' own fragments
-that has not been made. Each candidate gets a predicted score and a spread (12 bootstrap refits combined
-with the cross-validated RMSE). Two probabilities follow, assuming a normal distribution: P(+++) that the
-potency score is above +0.5 (midway between ++ and +++), and P(safe) that general_tox reaches the 90th
-percentile of the series. Candidates are ranked by their product, and six are picked greedily.
+that has not been made. Each candidate gets a predicted general_tox and a predicted potency score. Candidates
+with general_tox at the 90th percentile of the series or above are ranked by the sum of the two predictions,
+and six are picked greedily.
 Writes ``output/design/design_picks_xgb.csv`` and ``output/design/design_candidates_xgb.csv``.
 """
 
@@ -22,7 +21,6 @@ import numpy as np
 import pandas as pd
 from rdkit import Chem, DataStructs
 from rdkit.Chem import Descriptors, rdFingerprintGenerator
-from scipy.stats import norm
 from sklearn.model_selection import KFold
 from xgboost import XGBRegressor
 
@@ -33,10 +31,9 @@ R1_OPTIONS = ("F[*:1]", "Cl[*:1]", "N#CC[*:1]", "CC(C#N)[*:1]", "CC(C)(C#N)[*:1]
 R3_OPTIONS = ("[H][*:3]", "F[*:3]", "Cl[*:3]")
 R4_H = "[H][*:4]"
 POTENCY_SCORE = {"+": -1.0, "++": 0.0, "+++": 1.0}
-TOP_CUT = 0.5  # a score above it counts as predicted +++
 MIN_SUPPORT = 2  # combination of R1, R3 and sub-series made at least this often, so potency is interpolated
 N_PICKS, MAX_PER_SUBSERIES, MAX_SIMILARITY = 6, 3, 0.85
-N_BOOTSTRAP, SEED = 12, D.RANDOM_SEED
+SEED = D.RANDOM_SEED
 #: Left out of the training set, as in the study the slide shows: its R-group decomposition failed before the SMILES correction.
 LEFT_OUT = "Compound_I-C-50"
 
@@ -99,44 +96,35 @@ def regressor(seed: int) -> XGBRegressor:
                         subsample=0.8, colsample_bytree=0.5, reg_lambda=1.0, n_jobs=-1, random_state=seed)
 
 
-def fit_endpoint(x: np.ndarray, y: np.ndarray) -> tuple[list[XGBRegressor], float]:
-    """Bootstrap refits and the cross-validated RMSE (5 folds, 3 repeats) of one endpoint."""
-    predictions = np.zeros((3, len(y)))
+def cross_validate(x: np.ndarray, y: np.ndarray) -> tuple[float, float]:
+    """RMSE and R^2 of 5-fold cross-validation (3 shuffles, averaged)."""
+    rmse, r2 = [], []
     for repeat in range(3):
+        predicted = np.zeros(len(y))
         for train_idx, test_idx in KFold(5, shuffle=True, random_state=repeat).split(y):
-            predictions[repeat, test_idx] = regressor(SEED + repeat).fit(x[train_idx], y[train_idx]).predict(x[test_idx])
-    rmse = float(np.mean([np.sqrt(((y - p) ** 2).mean()) for p in predictions]))
-    rng = np.random.default_rng(SEED)
-    fits = []
-    for k in range(N_BOOTSTRAP):
-        idx = rng.integers(0, len(y), len(y))
-        fits.append(regressor(SEED + k).fit(x[idx], y[idx]))
-    return fits, rmse
-
-
-def predict(endpoint: tuple[list[XGBRegressor], float], x: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Mean prediction and its spread (bootstrap variance plus cross-validated RMSE squared)."""
-    fits, rmse = endpoint
-    stack = np.vstack([m.predict(x) for m in fits])
-    return stack.mean(axis=0), np.sqrt(stack.var(axis=0) + rmse**2)
+            predicted[test_idx] = regressor(SEED + repeat).fit(x[train_idx], y[train_idx]).predict(x[test_idx])
+        rmse.append(np.sqrt(((y - predicted) ** 2).mean()))
+        r2.append(1 - ((y - predicted) ** 2).sum() / ((y - y.mean()) ** 2).sum())
+    return float(np.mean(rmse)), float(np.mean(r2))
 
 
 def score_library(train: pd.DataFrame, library: pd.DataFrame) -> pd.DataFrame:
-    """Predicted general_tox and potency of every candidate, with P(+++), P(safe) and their product."""
+    """Predicted general_tox and potency of every candidate, and how well the combination has been tried before."""
     x_train = fingerprints(train["flat_smiles"])
     known = train["ki_bin"].notna().to_numpy()
-    safety = fit_endpoint(x_train, train["general_tox"].to_numpy())
-    potency = fit_endpoint(x_train[known], train.loc[known, "ki_bin"].map(POTENCY_SCORE).to_numpy())
+    y_safety = train["general_tox"].to_numpy()
+    y_potency = train.loc[known, "ki_bin"].map(POTENCY_SCORE).to_numpy()
+    for name, x, y in (("general_tox", x_train, y_safety), ("potency score", x_train[known], y_potency)):
+        rmse, r2 = cross_validate(x, y)
+        print(f"{name}: 5-fold cross-validation RMSE {rmse:.2f}, R2 {r2:.2f}")
+    safety = regressor(SEED).fit(x_train, y_safety)
+    potency = regressor(SEED).fit(x_train[known], y_potency)
 
     x_library = fingerprints(library["flat_smiles"])
     scored = library.copy()
-    scored["tox"], scored["tox_sd"] = predict(safety, x_library)
-    scored["potency"], scored["potency_sd"] = predict(potency, x_library)
-    scored["p_top"] = norm.sf((TOP_CUT - scored["potency"]) / scored["potency_sd"])
-    scored["p_ge2"] = norm.sf((-TOP_CUT - scored["potency"]) / scored["potency_sd"])
-    cutoff, _ = D.thresholds(D.candidate_table())
-    scored["p_safe"] = norm.cdf((scored["tox"] - cutoff) / scored["tox_sd"])
-    scored["p_joint"] = scored["p_safe"] * scored["p_top"]
+    scored["tox"] = safety.predict(x_library)
+    scored["potency"] = potency.predict(x_library)
+    scored["score"] = scored["tox"] + scored["potency"]
 
     # Evidence: how often the combination of R1, R3 and sub-series has been made, and how often as +++.
     key = train["R1"] + "|" + train["R3"] + "|" + train["subseries"]
@@ -158,9 +146,10 @@ def score_library(train: pd.DataFrame, library: pd.DataFrame) -> pd.DataFrame:
 
 
 def pick_designs(scored: pd.DataFrame) -> pd.DataFrame:
-    """Greedy pick by P(both) among candidates with measured neighbors: at most three per sub-series,
-    no two more similar than a Morgan Tanimoto of 0.85."""
-    pool = scored[scored["n_support"] >= MIN_SUPPORT].sort_values("p_joint", ascending=False)
+    """Greedy pick by predicted general_tox + potency among candidates with measured neighbors and general_tox at the
+    series' 90th percentile or above: at most three per sub-series, no two more similar than a Morgan Tanimoto of 0.85."""
+    cutoff, _ = D.thresholds(D.candidate_table())
+    pool = scored[(scored["n_support"] >= MIN_SUPPORT) & (scored["tox"] >= cutoff)].sort_values("score", ascending=False)
     generator = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048)
     chosen, chosen_fps, per_subseries = [], [], {}
     for idx, row in pool.iterrows():
@@ -186,11 +175,11 @@ def main() -> None:
     scored = score_library(train, library)
     picks = pick_designs(scored)
     D.DESIGN_DIR.mkdir(parents=True, exist_ok=True)
-    picks[["design", "subseries", "R2", "smiles", "tox", "tox_sd", "potency", "potency_sd", "p_top", "p_ge2", "p_safe", "p_joint",
+    picks[["design", "subseries", "R2", "smiles", "tox", "potency", "score",
            "n_support", "n_support_top", "parent", "parent_ki_bin", "parent_tox", "n_basic_nitrogen", "mw"]].round(3).to_csv(
         D.DESIGN_DIR / "design_picks_xgb.csv", index=False)
-    eligible = scored[scored["n_support"] >= MIN_SUPPORT].sort_values("p_joint", ascending=False)
-    eligible[["subseries", "tox", "potency", "p_top", "p_ge2", "p_joint"]].round(3).to_csv(
+    eligible = scored[scored["n_support"] >= MIN_SUPPORT].sort_values("score", ascending=False)
+    eligible[["subseries", "tox", "potency", "score"]].round(3).to_csv(
         D.DESIGN_DIR / "design_candidates_xgb.csv", index=False)
     print(f"{len(library):,} virtual compounds, {len(eligible):,} with measured neighbors; designs: {', '.join(picks['design'])}")
 

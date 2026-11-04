@@ -69,7 +69,7 @@ TITLES: Final[dict[str, str]] = {
     "slide_07_mechanism": "Bioactivation hypothesis and what to test next",
     "slide_08_shortlist": "Shortlist of 23 safer patent compounds",
     "slide_09_designs": "Six proposed designs, predicted safe and potent",
-    "slide_10_synthesis": "Designs D1, D4 and D5 reachable with patent chemistry",
+    "slide_10_synthesis": "Designs D2, D4 and D6 reachable with patent chemistry",
 }
 
 #: The only sizes, in points, used by any slide figure (the title is the one larger size).
