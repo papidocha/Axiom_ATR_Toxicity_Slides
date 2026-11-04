@@ -1,12 +1,11 @@
 """Slide 7: how a cyclic basic amine can turn toxic, what failed in the clinic, and what to test next.
 
-1. Bioactivation of gartisertib's piperazine: a CYP enzyme oxidizes the carbon next to the basic nitrogen (via the
+A. Bioactivation of gartisertib's piperazine: a CYP enzyme oxidizes the carbon next to the basic nitrogen (via the
    carbinolamine, which loses water) to an iminium ion; water adds and the ring opens to an amino-aldehyde. Both are
    electrophiles that can bind proteins. A hypothesis from the literature, not tested here.
-2. Gartisertib inhibits UGT1A1 in human liver microsomes only (Burris et al., Br J Cancer 2024; 130: 1131) and what
+B. Gartisertib inhibits UGT1A1 in human liver microsomes only (Burris et al., Br J Cancer 2024; 130: 1131) and what
    the delivered predictions can and cannot say about it.
-3. The experiments that would explain the toxicity of the series and what to test on the recommended compounds.
-The mass balance of the three drawn structures is checked with RDKit.
+C. The experiments that would explain the toxicity of the series and what to test on the recommended compounds.
 """
 
 from __future__ import annotations
@@ -146,14 +145,14 @@ def slide_07_mechanism() -> None:
     ax.plot([6.2, 6.2], [_BOTTOM_TOP, 5.95], color=pu.GRID, linewidth=1.0)
 
     # ---- 1: bioactivation ------------------------------------------------------------------- #
-    pu.text(ax, 0.0, 0.1, "1.  How a cyclic basic amine can turn toxic", size=pu.SIZE_HEADING, weight="bold", va="top")
+    pu.text(ax, 0.0, 0.1, "A.  How a cyclic basic amine can turn toxic", size=pu.SIZE_HEADING, weight="bold", va="top")
     pu.text(ax, 0.0, 0.5, f"In Axiom Bio's predicted data a basic N lowers general_tox (median {_minus(f'{d['median_zero']:+.2f}')} without, "
          f"{_minus(f'{d['median_one']:+.2f}')} with one; \u03c1 {_minus(f'{d['rho_basic']:.2f}')}). Bioactivation is one way a cyclic amine could do this.",
          size=pu.SIZE_SMALL, colour=pu.MUTED, va="top")
     extras = _bioactivation(ax)
 
     # ---- 2: what failed -------------------------------------------------------------------- #
-    pu.text(ax, 0.0, _BOTTOM_TOP, "2.  What failed in the clinic", size=pu.SIZE_HEADING, weight="bold", va="top")
+    pu.text(ax, 0.0, _BOTTOM_TOP, "B.  What failed in the clinic", size=pu.SIZE_HEADING, weight="bold", va="top")
     pu.text(ax, 0.0, _BOTTOM_TOP + 0.45, "Gartisertib inhibits UGT1A1 in human liver only", weight="bold", va="top")
     _ugt1a1_chart(fig, 0.85, _BOTTOM_TOP + 0.72)
     _bullets(ax, 0.0, _BOTTOM_TOP + 1.47, [
@@ -163,7 +162,7 @@ def slide_07_mechanism() -> None:
     ], wrap=66)
 
     # ---- 3: next steps ---------------------------------------------------------------------- #
-    pu.text(ax, _RIGHT_X, _BOTTOM_TOP, "3.  What to test next", size=pu.SIZE_HEADING, weight="bold", va="top")
+    pu.text(ax, _RIGHT_X, _BOTTOM_TOP, "C.  What to test next", size=pu.SIZE_HEADING, weight="bold", va="top")
     y = _BOTTOM_TOP + 0.45
     pu.text(ax, _RIGHT_X, y, "To understand the gartisertib series", weight="bold", va="top")
     y = _bullets(ax, _RIGHT_X, y + _LINE + 0.02, [
