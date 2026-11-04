@@ -1549,7 +1549,7 @@ L 527.4 446.4
 " style="fill: none; stroke: #e3e3e3; stroke-linecap: square"/>
   </g>
   <g id="text_16">
-   <text font-weight="700" font-size="16" font-family="Arial, Helvetica, sans-serif" text-anchor="start" fill="#222222" x="0" y="18.848438" transform="rotate(-0 0 18.848438)">A.  Predicted safety by patent K<tspan font-size="11.2" dy="3.520">i</tspan><tspan dy="-3.520"> bin</tspan></text>
+   <text font-weight="700" font-size="16" font-family="Arial, Helvetica, sans-serif" text-anchor="start" fill="#222222" x="0" y="18.848438" transform="rotate(-0 0 18.848438)">A.  Predicted safety by patent K<tspan font-size="11.2" dx="0.960" dy="3.520">i</tspan><tspan dy="-3.520"> bin</tspan></text>
   </g>
   <g id="text_17">
    <text font-weight="700" font-size="16" font-family="Arial, Helvetica, sans-serif" text-anchor="start" fill="#222222" x="496.8" y="18.848438" transform="rotate(-0 496.8 18.848438)">B.  Selected compounds in chemical space</text>

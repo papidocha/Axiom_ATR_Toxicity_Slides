@@ -285,6 +285,7 @@ _PLAIN_TEXT_ELEMENT = re.compile(r"(<text\b[^>]*>)([^<]*)(</text>)")
 _SIZE_ATTRIBUTE = re.compile(r'font-size="([\d.]+)"')
 _SUBSCRIPT_DROP = 0.22  #: em, downwards
 _SUPERSCRIPT_RISE = 0.38  #: em, upwards
+_KI_HEADING_DX = 0.06  #: em, to the right: keeps the i of K_i in 16 pt headings off the K when PowerPoint re-lays out the text
 
 
 def _scripted_content(content: str, size: float) -> str:
@@ -330,7 +331,9 @@ def _scripted_content(content: str, size: float) -> str:
             continue
         dy = (offset - current) * size
         size_attribute = f' font-size="{piece_size:g}"' if piece_size != size else ""
-        out.append(f'<tspan{size_attribute} dy="{dy:.3f}">{text}</tspan>')
+        nudge = text == "i" and size == SIZE_HEADING and pieces[index - 1][0].endswith("K")
+        dx_attribute = f' dx="{_KI_HEADING_DX * size:.3f}"' if nudge else ""
+        out.append(f'<tspan{size_attribute}{dx_attribute} dy="{dy:.3f}">{text}</tspan>')
         current = offset
     return "".join(out)
 
