@@ -53,8 +53,5 @@ python code/design.py          # optional: recomputes the designs of slide 9 (ab
 
 * `_ld20` / `_ld50` columns are EC20 / EC50 effect concentrations in µM, not lethal doses. Predictions at or above the
   200 µM ceiling are censored (no effect reached), not measurements.
-* Text is live (Arial; the `general_tox` equation on slide 4 in Times New Roman) in four sizes: 24 pt titles, 16 pt panel
-  headings, 12 pt labels, 10 pt tick labels and footnotes. `save_svg` checks this on every figure.
-* The corner of the slide where PowerPoint puts its page number (bottom right) is kept free.
-* Compound_I-C-50 is drawn without its aromatic pyrazole circle in the data file; the corrected SMILES is applied in code
+* Compound_I-C-50 is drawn without its aromatic pyrazole circle in the patent file; the corrected SMILES is applied in code
   (`SMILES_CORRECTIONS`), the data file is untouched.

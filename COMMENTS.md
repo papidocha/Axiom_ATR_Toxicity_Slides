@@ -53,14 +53,14 @@ The values are Axiom Bio's predictions and the patent's measurements, nothing is
 
 Reproduced by `python code/design.py` (about a minute).
 
-* **Why a surrogate model:** I don't have access to run Axiom Bio's GNN beyond the structures in provided with the task, so a model was trained to
+* **Why a surrogate model:** I don't have access to run Axiom Bio's GNN beyond the structures provided in the task, so a model was trained to
   reproduce its `general_tox` output (and the patent potency) from the structure, and used to score new compounds.
 * **Virtual library:** built from the series' own pieces. Every observed R1 substituent (7) × every observed R2 tail (401) × R3 in
   {H, F, Cl}, with R4 = H, minus the compounds that were already made. No new fragment is invented, so each design is a new combination
   of known parts. All designs keep the shared core, so they remain one coupling step from intermediates the patent already makes (slide 10).
 * **Evidence filter:** a candidate is kept only if its combination of R1, R3 and sub-series (I-N, I-G, I-O, and I-C) has been made at least twice, so that
   potency is interpolated between measured neighbors, not guessed. This leaves 2,125 unmade candidates.
-* **Features and learner:** Morgan count fingerprint of the whole molecule (radius 2, 1,024 bits), XGBoost regression, the same for both the potency and safety endpoint.
+* **Features and learner:** Morgan fingerprint of the whole molecule (radius 2, 1,024 bits), XGBoost regression, the same for both the potency and safety endpoint.
 * **Training labels:**
   * *Safety:* `general_tox` of the 552 compounds that decompose into the R-group scheme, that is, **the GNN's predictions, not experimental
     toxicity**. Any error of Axiom Bio's GNN passes into the design.
@@ -85,4 +85,4 @@ Reproduced by `python code/design.py` (about a minute).
 The designs are only as good as the surrogate, which learned from the GNN's outputs and not from toxicity measurements. Direct access to
 Axiom Bio's GNN would allow scoring the virtual library with the real model and would remove the surrogate's error. Better still would be to
 **retrain the GNN with more compounds from this series that have experimental in-house toxicity data**: measured data exist for only
-two of the 553 compounds (gartisertib and tuvusertib), too few to check, let alone tune, the predictions inside this chemical series.
+two of the 553 compounds (gartisertib and tuvusertib), too few to check, let alone tune the predictions inside this chemical series.
