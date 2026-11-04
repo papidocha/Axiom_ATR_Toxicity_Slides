@@ -9,8 +9,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "code"))
 
-import load_data  # noqa: E402
-
 SLIDES = (
     "slide_01_title", "slide_02_chemical_space", "slide_03_potency_recovery", "slide_04_validation",
     "slide_05_chemical_landscape", "slide_06_physicochemistry", "slide_07_mechanism", "slide_08_shortlist",
@@ -18,6 +16,8 @@ SLIDES = (
 )
 
 if __name__ == "__main__":
+    import load_data
+
     for name in SLIDES:
         getattr(importlib.import_module(name), name)()
     load_data.write_shortlist_csv()

@@ -23,7 +23,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_04_validation"
 
 #: Size of all text on this slide except the panel titles (16 pt) and the equation

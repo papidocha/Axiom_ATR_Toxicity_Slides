@@ -20,7 +20,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_07_mechanism"
 
 _LINE = 0.215  #: inches per 12 pt line

@@ -14,7 +14,7 @@ python code/design.py          # optional: recomputes the designs of slide 9 (ab
 
 | Path | Content |
 |---|---|
-| `code/slide_NN_*.py`, `appendix_01_*.py` | One self-contained script per slide; each draws its figure and returns the numbers it shows |
+| `code/slide_NN_*.py`, `appendix_01_*.py` | One self-contained script per slide; each draws one figure and writes it to `slides/` |
 | `code/load_data.py` | Reads the inputs; computes `general_tox`, descriptors, patent Ki bins, the shortlist rule and the predicted-versus-measured table |
 | `code/design.py` | Virtual screen and XGBoost models behind slide 9 |
 | `code/plot_utils.py` | Style, SVG page layout and titles, RDKit structure drawing shared by several slides |

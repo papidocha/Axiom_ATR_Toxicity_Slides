@@ -16,7 +16,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_06_physicochemistry"
 
 #: Descriptor column -> axis label. Order is the order of the scatter panels.

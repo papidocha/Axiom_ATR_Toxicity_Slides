@@ -644,7 +644,6 @@ def lighten(hex_colour: str, amount: float) -> str:
     return "#" + "".join(f"{round(c + (255 - c) * amount):02x}" for c in rgb)
 
 
-
 #: Colours of the designs (slides 9 and 10): the green of slide 8's selection, lightened.
 DESIGN_GREEN = "#009E73"
 DESIGN_SCAFFOLD = Chem.MolFromSmarts("Nc1nn2cc(CC#N)cnc2c1C(=O)Nc1cnccc1")  #: scaffold shared by all designs

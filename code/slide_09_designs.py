@@ -19,7 +19,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_09_designs"
 _CANVAS = (3.0, 2.8)  #: larger than D4's long tail, so no structure is shrunk below slide 2's bond length
 

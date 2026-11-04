@@ -16,7 +16,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_03_potency_recovery"
 
 #: Patent bins left to right, most potent first, then compounds without a patent value.

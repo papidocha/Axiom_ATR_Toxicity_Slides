@@ -14,7 +14,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_05_chemical_landscape"
 
 #: Patent Ki bins drawn least potent first, so the potent compounds end up on top.

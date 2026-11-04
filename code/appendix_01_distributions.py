@@ -15,7 +15,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "appendix_01_distributions"
 
 _LOG_CEILING = float(np.log10(D.CEILING_UM))

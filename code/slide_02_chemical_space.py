@@ -19,7 +19,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_02_chemical_space"
 
 #: Core with the three variable attachment points labelled as the decomposition does.

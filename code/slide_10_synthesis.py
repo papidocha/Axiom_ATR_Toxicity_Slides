@@ -17,7 +17,6 @@ import load_data as D
 import plot_utils as pu
 
 
-
 NAME = "slide_10_synthesis"
 
 _PATENT = pu.SERIES  #: documented in the patent
