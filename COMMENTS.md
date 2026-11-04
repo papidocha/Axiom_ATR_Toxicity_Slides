@@ -1,6 +1,6 @@
 # Comments on slides 4, 8 and 9
 
-Only the points that cannot be read from the slides are mentiond here. "Predicted" means Axiom Bio's GNN output unless stated otherwise.
+Only the points that cannot be read from the slides are mentioned here. "Predicted" means Axiom Bio's GNN output unless stated otherwise.
 
 ## Slide 4: what goes into general_tox
 
@@ -19,7 +19,7 @@ not lethal doses). **Panel C shows exactly the 15 columns that enter the score, 
 | ROS | used | **not used** | EC50: 292 of 553 (53 %) at the ceiling; excluded by decision, because it would also leave gartisertib and tuvusertib tied |
 | Bioactivity 1 | used | used | |
 | Bioactivity 2 | used | used | |
-| Halos | **not used** | **not used** | Excluded after discussion with Chengpeng|
+| Halos | **not used** | **not used** | Excluded after discussion with Chengpeng |
 
 * **Excluded columns (5 of the 20 EC columns, plus halos):** `ldh_ld50`, `cell_death_ld50`, `nuclei_size_ld50`, `mitochondria_ld50`,
   `ros_ld50`. For the first four, 76 to 99 % of the values are at the 200 µM ceiling, so they have no spread and carry no ranking
@@ -76,8 +76,8 @@ Reproduced by `python code/design.py` (about a minute).
   3. Rank the 40 by predicted `general_tox` plus predicted potency score (D1: 1.53 + 0.83 = 2.36).
   4. Go down the ranking and take a candidate unless three from its sub-series are already chosen or it has a Morgan Tanimoto similarity
      above 0.85 to one already chosen. Stop at six.
-* **Accuracy (5-fold cross-validation within the series):** `general_tox` R² 0.87, RMSE 0.33; potency score R² 0.33, but AUC 0.93 for
-  separating +++ from the rest (0.80 within the 40 compounds with R1 = CH2CN). The folds are random, so neighbors of every test compound
+* **Accuracy (5-fold cross-validation within the series):** `general_tox` R² 0.87, RMSE 0.33; potency score R² 0.33, RMSE 0.28 (both printed
+  by `design.py`). The folds are random, so neighbors of every test compound
   are in the training set: this shows the model interpolates within the series, not how it does on truly new chemistry.
 
 ## What would make this better
